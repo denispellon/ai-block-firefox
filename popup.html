@@ -2,37 +2,116 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: system-ui, sans-serif;
-            width: 90vw; /* Largeur relative à la fenêtre */
-            max-width: 300px; /* Largeur maximale pour éviter un étirement trop large */
-            padding: 12px;
-            margin: 0 auto; /* Centre le contenu horizontalement */
+            min-width: 260px;
+            max-width: 100%;
+            margin: 0;
+            padding: 14px;
+            box-sizing: border-box;
             text-align: center;
-            box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+            background-color: #fff;
+            color: #202124;
+            user-select: none;
+            -webkit-user-select: none;
         }
-        .status {
-            color: #0f9d58;
-            font-weight: bold;
-        }
+
         h3 {
-            margin: 0 0 8px 0; /* Réduit l'espace sous le titre */
-            font-size: 1.2em; /* Taille de police adaptée */
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
         }
-        p {
-            margin: 8px 0; /* Espacement vertical */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .toggle-label {
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 22px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #0f9d58;
+        }
+        input:checked + .slider:before {
+            transform: translateX(18px);
         }
         small {
             color: #666;
-            font-size: 0.8em; /* Taille de police réduite pour la version */
+            font-size: 0.75em;
+        }
+        
+        .popup-footer {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #e8eaed;
+        }
+        .changelog-link {
+            color: #1a73e8;
+            font-size: 0.75em;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .changelog-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <h3>IA Overview disabler</h3>
-    <p>Status: <span class="status">Active</span></p>
-    <small>v1.0.3</small>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">Activate</span>
+        <label class="switch">
+            <input type="checkbox" id="toggleState" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <small>v1.1.5</small>
+
+    <div class="popup-footer">
+        <a href="https://denispellon.github.io/ai-block-firefox/" class="changelog-link" target="_blank" rel="noopener">
+            Informations
+        </a>
+    </div>
+
+    <!-- External JS for CSP -->
+    <script src="popup.js"></script>
 </body>
 </html>

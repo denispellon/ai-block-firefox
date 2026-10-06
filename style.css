@@ -1,0 +1,6 @@
+div[data-attrid="wa:/description"],
+div[aria-label="Aperçu de l'IA"],
+div[aria-label="AI Overview"],
+#kp-wp-tab-overview {
+    display: none !important;
+}

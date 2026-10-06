@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Présentation & Nouveautés</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: #0d1117;
+      --text: #e2e8f0;
+      --text-muted: #8b949e;
+      --accent: #38bdf8;
+      --border: #21262d;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --card-bg: #f6f8fa;
+        --text: #1f2328;
+        --text-muted: #656d76;
+        --accent: #0284c7;
+        --border: #d0d7de;
+      }
+    }
+
+    body, h1, h2, p, ul { margin: 0; padding: 0; }
+    *, ::before, ::after { box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-rendering: optimizeSpeed;
+      -webkit-font-smoothing: antialiased;
+      
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1.5rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .lang-switch {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    header { text-align: center; padding: 1.5rem 0 2rem; }
+    header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    header p { color: var(--text-muted); font-size: 1rem; }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--accent); }
+
+    .release {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .release:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .release-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+    .version { font-weight: bold; font-size: 1.1rem; }
+    .date { font-size: 0.85rem; color: var(--text-muted); }
+
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.3rem; }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+    }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <button class="lang-switch" id="lang-btn" onclick="toggleLanguage()">EN</button>
+  </div>
+
+  <header>
+    <h1>AI Block - Google Overviews</h1>
+    <p  data-fr="Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google" 
+        data-en="A simple extension to get rid of AI Reviews on Google web pages">
+        Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google
+    </p>
+    <a href="https://addons.mozilla.org/fr/firefox/addon/ai-block-for-google-overviews/" class="btn" target="_blank" rel="noopener" data-fr="Installer sur Firefox" data-en="Install on Firefox">Installer sur Firefox</a>
+  </header>
+
+  <main>
+    <section>
+      <h2 data-fr="À propos" data-en="About">À propos</h2>
+      <p data-fr="L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. A tout moment et selon le besoin, elle peut-être désactivée." 
+         data-en="The objective is to block IA Review displayed in Google searches. Blocking takes place before the query is made in order to make real saving on energy  and the water consumption, as well as improving visual comfort. It can be disabled at any time, if needed.">
+         L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. A tout moment et selon le besoin, elle peut-être désactivée.
+      </p>
+    </section>
+
+    <section>
+      <h2 data-fr="Journal des évolutions" data-en="Changelog">Journal des évolutions</h2>
+
+      <article class="release">
+        <div class="release-header">
+          <span class="version">v1.1.5</span>
+          <span class="date" data-fr="Prochainement" data-en="Coming soon">Prochainement</span>
+        </div>
+        <ul>
+          <li data-fr="Ajout d'un switch ON/OFF pour la désactivation sur demande." data-en="Toggle switch for deactivation if needed.">Ajout d'un switch ON/OFF pour la désactivation sur demande.</li>
+        </ul>
+        <div class="release-header">
+          <span class="version">v1.0.3</span>
+          <span class="date" data-fr="17 septembre 2026" data-en="September 17, 2026">17 septembre 2026</span>
+        </div>
+        <ul>
+          <li data-fr="Compatibilité Android." data-en="Android compatibility.">Compatibilité Android.</li>
+        </ul>
+        <div class="release-header">
+          <span class="version">v1.0.1</span>
+          <span class="date" data-fr="31 juillet 2026" data-en="July 31, 2026">31 juillet 2026</span>
+        </div>
+        <ul>
+          <li data-fr="Première sortie: Blocage de l'IA dans toutes les recherches Google." data-en="First release: Blocking all IA review in Google Search.">Première sortie: Blocage de l'IA dans toutes les recherches Google.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span data-fr="© 2026 — Licence MIT — Développé pour Mozilla Firefox par" 
+          data-en="© 2026 — MIT License — Developed for Mozilla Firefox by">
+      © 2026 — Licence MIT — Développé pour Mozilla Firefox par
+    </span>
+    <a href="https://github.com/denispellon" target="_blank" rel="noopener">Twonest</a>.
+  </footer>
+
+  <script src="ghp-index-script.js" defer></script>
+
+</body>
+</html>
