@@ -1,11 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "AI Block",
+    "name": "AI Block - beta version",
     "version": "1.1.5",
     "description": "Google AI Overview blocker",
     "browser_specific_settings": {
         "gecko": {
-            "id": "ai-block@twonest.com",
+            "id": "ai-block-beta@twonest.com",
             "data_collection_permissions": {
                 "required": ["none"]
             }
