@@ -3,175 +3,327 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Présentation & Nouveautés</title>
+  <title>AI Block - Google Overviews // twonest</title>
   <style>
+    /* Variables - Identiques au site principal */
     :root {
-      --bg: #000000;
-      --card-bg: #0d1117;
-      --text: #e2e8f0;
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
       --text-muted: #8b949e;
-      --accent: #38bdf8;
-      --border: #21262d;
+      --accent: #238636; /* Vert terminal / LED */
+      --accent-glow: rgba(35, 134, 54, 0.15);
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #ffffff;
-        --card-bg: #f6f8fa;
-        --text: #1f2328;
-        --text-muted: #656d76;
-        --accent: #0284c7;
-        --border: #d0d7de;
-      }
-    }
-
-    body, h1, h2, p, ul { margin: 0; padding: 0; }
-    *, ::before, ::after { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      text-rendering: optimizeSpeed;
-      -webkit-font-smoothing: antialiased;
-      
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: 1.5rem 1rem;
-      max-width: 680px;
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
-    .top-bar {
+    /* En-tête avec logo > twonest // et sélecteur de langue */
+    header {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
     }
 
-    .lang-switch {
-      background: var(--card-bg);
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .lang-btn {
+      background: transparent;
       border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      cursor: pointer;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      font-family: var(--font-mono);
       font-size: 0.85rem;
-      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
     }
 
-    header { text-align: center; padding: 1.5rem 0 2rem; }
-    header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    header p { color: var(--text-muted); font-size: 1rem; }
+    .lang-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
 
+    /* Block Hero Extension */
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    /* Boutons Rétro Terminal */
     .btn {
       display: inline-block;
-      margin-top: 1rem;
-      background-color: var(--accent);
-      color: #000;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--accent);
+      padding: 10px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
       text-decoration: none;
-      font-weight: 700;
+      transition: background 0.2s;
     }
 
-    section {
-      background: var(--card-bg);
+    .btn:hover {
+      background: var(--accent-glow);
+    }
+
+    /* Titres de Section avec Ligne Droite */
+    section { margin-bottom: 40px; }
+
+    h2 {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Conteneurs d'information */
+    .card-box {
+      background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
+      padding: 25px;
     }
 
-    h2 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--accent); }
+    .card-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
 
+    /* Journal des évolutions */
     .release {
       border-bottom: 1px solid var(--border);
-      padding-bottom: 1rem;
-      margin-bottom: 1rem;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
     }
-    .release:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .release:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
 
     .release-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 0.5rem;
+      margin-bottom: 8px;
     }
-    .version { font-weight: bold; font-size: 1.1rem; }
-    .date { font-size: 0.85rem; color: var(--text-muted); }
 
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.3rem; }
+    .version {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--text);
+      font-size: 1rem;
+    }
 
-    footer {
-      text-align: center;
-      color: var(--text-muted);
+    .date {
+      font-family: var(--font-mono);
       font-size: 0.85rem;
-      margin-top: 2rem;
+      color: var(--accent);
     }
-    footer a { color: inherit; }
+
+    ul.release-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.release-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    ul.release-list li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <button class="lang-switch" id="lang-btn" onclick="toggleLanguage()">EN</button>
-  </div>
-
+  <!-- En-tête minimaliste -->
   <header>
-    <h1>AI Block - Google Overviews</h1>
-    <p  data-fr="Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google" 
-        data-en="A simple extension to get rid of AI Reviews on Google web pages">
-        Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google
-    </p>
-    <a href="https://addons.mozilla.org/fr/firefox/addon/ai-block-for-google-overviews/" class="btn" target="_blank" rel="noopener" data-fr="Installer sur Firefox" data-en="Install on Firefox">Installer sur Firefox</a>
+    <div class="logo">&gt; twonest //</div>
+    <button class="lang-btn" id="lang-btn" onclick="toggleLanguage()">EN</button>
   </header>
 
   <main>
-    <section>
-      <h2 data-fr="À propos" data-en="About">À propos</h2>
-      <p data-fr="L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. A tout moment et selon le besoin, elle peut-être désactivée." 
-         data-en="The objective is to block IA Review displayed in Google searches. Blocking takes place before the query is made in order to make real saving on energy  and the water consumption, as well as improving visual comfort. It can be disabled at any time, if needed.">
-         L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. A tout moment et selon le besoin, elle peut-être désactivée.
+    <!-- Section Hero -->
+    <div class="hero">
+      <h1>[ AI Block - Google Overviews ]</h1>
+      <p data-fr="Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google" 
+         data-en="A simple extension to get rid of AI Overviews on Google web searches">
+         Une extension simple pour vous débarrasser des résumés IA sur vos recherches Google
       </p>
+      <a href="https://addons.mozilla.org/fr/firefox/addon/ai-block-for-google-overviews/" 
+         class="btn" 
+         target="_blank" 
+         rel="noopener" 
+         data-fr="&gt; Installer sur Firefox" 
+         data-en="&gt; Install on Firefox">&gt; Installer sur Firefox</a>
+    </div>
+
+    <!-- Section À Propos -->
+    <section>
+      <h2 data-fr="01. À PROPOS" data-en="01. ABOUT">01. À PROPOS</h2>
+      <div class="card-box">
+        <p data-fr="L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. À tout moment et selon le besoin, elle peut être désactivée." 
+           data-en="The objective is to block AI Overviews displayed in Google searches. Blocking takes place before the query is made to achieve real savings in energy and water consumption, while improving visual comfort. It can be disabled at any time if needed.">
+           L'objectif est de bloquer les nouveaux résumés IA affichés lors des recherches Google. Le blocage se fait avant le lancement de la requête afin d'économiser réellement les ressources énergétiques et l'eau consommée, en plus d'améliorer le confort visuel. À tout moment et selon le besoin, elle peut être désactivée.
+        </p>
+      </div>
     </section>
 
+    <!-- Section Changelog -->
     <section>
-      <h2 data-fr="Journal des évolutions" data-en="Changelog">Journal des évolutions</h2>
+      <h2 data-fr="02. JOURNAL DES ÉVOLUTIONS" data-en="02. CHANGELOG">02. JOURNAL DES ÉVOLUTIONS</h2>
+      <div class="card-box">
+        
+        <article class="release">
+          <div class="release-header">
+            <span class="version">v1.1.6</span>
+            <span class="date" data-fr="2 novembre 2026" data-en="November 2, 2026">8 octobre 2026</span>
+          </div>
+          <ul class="release-list">
+            <li data-fr="Modifications graphiques." data-en="Style modifications.">Modifications graphiques.</li>
+          </ul>
+        </article>
+        
+        <article class="release">
+          <div class="release-header">
+            <span class="version">v1.1.5</span>
+            <span class="date" data-fr="8 octobre 2026" data-en="Octobre 8, 2026">8 octobre 2026</span>
+          </div>
+          <ul class="release-list">
+            <li data-fr="Ajout d'un switch ON/OFF pour la désactivation sur demande." data-en="Toggle switch for deactivation on demand.">Ajout d'un switch ON/OFF pour la désactivation sur demande.</li>
+          </ul>
+        </article>
 
-      <article class="release">
-        <div class="release-header">
-          <span class="version">v1.1.5</span>
-          <span class="date" data-fr="8 octobre 2026" data-en="October 8, 2026">Prochainement</span>
-        </div>
-        <ul>
-          <li data-fr="Ajout d'un switch ON/OFF pour la désactivation sur demande." data-en="Toggle switch for deactivation if needed.">Ajout d'un switch ON/OFF pour la désactivation sur demande.</li>
-        </ul>
-        <div class="release-header">
-          <span class="version">v1.0.3</span>
-          <span class="date" data-fr="17 septembre 2026" data-en="September 17, 2026">17 septembre 2026</span>
-        </div>
-        <ul>
-          <li data-fr="Compatibilité Android." data-en="Android compatibility.">Compatibilité Android.</li>
-        </ul>
-        <div class="release-header">
-          <span class="version">v1.0.1</span>
-          <span class="date" data-fr="31 juillet 2026" data-en="July 31, 2026">31 juillet 2026</span>
-        </div>
-        <ul>
-          <li data-fr="Première sortie: Blocage de l'IA dans toutes les recherches Google." data-en="First release: Blocking all IA review in Google Search.">Première sortie: Blocage de l'IA dans toutes les recherches Google.</li>
-        </ul>
-      </article>
+        <article class="release">
+          <div class="release-header">
+            <span class="version">v1.0.3</span>
+            <span class="date" data-fr="17 septembre 2026" data-en="September 17, 2026">17 septembre 2026</span>
+          </div>
+          <ul class="release-list">
+            <li data-fr="Compatibilité Android." data-en="Android compatibility.">Compatibilité Android.</li>
+          </ul>
+        </article>
+
+        <article class="release">
+          <div class="release-header">
+            <span class="version">v1.0.1</span>
+            <span class="date" data-fr="31 juillet 2026" data-en="July 31, 2026">31 juillet 2026</span>
+          </div>
+          <ul class="release-list">
+            <li data-fr="Première sortie : Blocage de l'IA dans toutes les recherches Google." data-en="First release: Blocking AI overviews in all Google searches.">Première sortie : Blocage de l'IA dans toutes les recherches Google.</li>
+          </ul>
+        </article>
+
+      </div>
     </section>
   </main>
 
   <footer>
-    <span data-fr="© 2026 — Licence MIT — Développé pour Mozilla Firefox par" 
-          data-en="© 2026 — MIT License — Developed for Mozilla Firefox by">
-      © 2026 — Licence MIT — Développé pour Mozilla Firefox par
+    <span data-fr="© 2026 • Licence MIT • Développé pour Mozilla Firefox par" 
+          data-en="© 2026 • MIT License • Developed for Mozilla Firefox by">
+      © 2026 • Licence MIT • Développé pour Mozilla Firefox par
     </span>
-    <a href="https://github.com/denispellon" target="_blank" rel="noopener">Twonest</a>.
+    <a href="https://www.denispellon.fr" target="_blank" rel="noopener">twonest</a>.
   </footer>
 
-  <script src="ghp-index-script.js" defer></script>
+  <script>
+    let currentLang = 'fr';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      const langBtn = document.getElementById('lang-btn');
+      
+      if (langBtn) {
+        langBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
+      }
+
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        const text = el.getAttribute(`data-${currentLang}`);
+        if (text) {
+          el.textContent = text;
+        }
+      });
+
+      document.documentElement.lang = currentLang;
+    }
+  </script>
 
 </body>
 </html>
